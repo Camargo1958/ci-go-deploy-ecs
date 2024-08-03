@@ -12,10 +12,10 @@ jobs:
     name: Test on node ${{ matrix.node_version }} and go ${{ matrix.go_version }} and ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     env:
-      HOST: localhost
+      DBHOST: localhost
       DBPORT: 5432
-      USER: root
-      PASSWORD: root
+      DBUSER: root
+      DBPASSWORD: root
       DBNAME: root
     strategy:
       matrix:
@@ -31,10 +31,10 @@ jobs:
         go-version: ${{ matrix.go_version }}
       
     - name: Build-DB
-      run: docker-compose build
+      run: docker compose build
       
     - name: Create-DB
-      run: docker-compose up -d
+      run: docker compose up -d
 
     - name: Test
       run: go test -v main_test.go 
@@ -44,7 +44,7 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4.1.7 #actions/checkout@v3
+    - uses: actions/checkout@v4 #actions/checkout@v3
     - name: Build
       run: go build -v main.go
       
