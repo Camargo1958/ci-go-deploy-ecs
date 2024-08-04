@@ -24,7 +24,7 @@ jobs:
       with:
         task-definition: task-definition.json
         container-name: Go
-        image: hazak/go_ci:${{github.ref_name}}
+        image: hazak/go_ci:${{github.ref_name}} # ${{github.run_number}}
         environment-variables: |
           DBHOST=${{ secrets.DBHOST }}
           DBUSER=${{ secrets.DBUSER }}
